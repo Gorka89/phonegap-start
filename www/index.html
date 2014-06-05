@@ -1,165 +1,114 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Place searches</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-      html, body, #map-canvas {
-        height: 90%;
-        margin: 0px;
-        padding: 0px
-      }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script>
-var map;
-var service;
-var infowindow;
+<html><head>
+        <title>Media Example</title>
 
-function initialize(lat,longt) {
+       <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
 
-	alert(lat);
+        // Wait for Cordova to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
 
-	  var pyrmont = new google.maps.LatLng(-33.8665433,151.1956316);
-	  //var pyrmont = new google.maps.LatLng(lat,longt);
-
-	  map = new google.maps.Map(document.getElementById('map'), {
-	      mapTypeId: google.maps.MapTypeId.ROADMAP,
-	      center: pyrmont,
-	      zoom: 15
-	    });
-
-	  var request = {
-	    location: pyrmont,
-	    radius: '500',
-	    query: 'restaurant'
-	  };
-
-	  service = new google.maps.places.PlacesService(map);
-	  service.textSearch(request, callback);
-}
+        // Cordova is ready
+        //
+        function onDeviceReady() {
+            //playAudio("http://5.39.66.196:8073/;stream.mp3");
 
 
-function callback(results, status) {
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      var place = results[i];
-      createMarker(results[i]);
-    }
-  }
-}
+        	/*window.echo = function(str, callback) {
+        	    cordova.exec(callback, function(err) {
+        	        callback('Nothing to echo.');
+        	    }, "Echo", "echo", [str]);
+        	};*/
 
 
+        	window.echo("echo", function(echoValue) {
+        	    alert(echoValue == "echo"); // should alert true.
+        	});
+            
+        }
 
-function initialize2(lat,longt) {
-  //var pyrmont = new google.maps.LatLng(-33.8665433, 151.1956316);
-  var pyrmont = new google.maps.LatLng(lat,longt);
+        // Audio player
+        //
+        var my_media = null;
+        var mediaTimer = null;
 
-  map = new google.maps.Map(document.getElementById('map-canvas'), {
-    center: pyrmont,
-    zoom: 15
-  });
+        // Play audio
+        //
+        function playAudio(src) {
+            // Create Media object from src
+            my_media = new Media(src, onSuccess, onError);
 
-  var request = {
-    location: pyrmont,
-    radius: 500,
-    types: ['restaurant']
-  };
-  infowindow = new google.maps.InfoWindow();
-  var service = new google.maps.places.PlacesService(map);
-  service.nearbySearch(request, callback2);
-}
+            // Play audio
+            //my_media.play();
+            my_media.play({ playAudioWhenScreenIsLocked : false})
 
-function callback2(results, status) {
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
-    }
-  }
-}
+            // Update my_media position every second
+            if (mediaTimer == null) {
+                mediaTimer = setInterval(function() {
+                    // get my_media position
+                    my_media.getCurrentPosition(
+                        // success callback
+                        function(position) {
+                            if (position > -1) {
+                                setAudioPosition((position) + " sec");
+                            }
+                        },
+                        // error callback
+                        function(e) {
+                            console.log("Error getting pos=" + e);
+                            setAudioPosition("Error: " + e);
+                        }
+                    );
+                }, 1000);
+            }
+        }
 
-function createMarker(place) {
-  var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location
-  });
+        // Pause audio
+        // 
+        function pauseAudio() {
+            if (my_media) {
+                my_media.pause();
+            }
+        }
 
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.setContent(place.name);
-    infowindow.open(map, this);
-  });
-}
+        // Stop audio
+        // 
+        function stopAudio() {
+            if (my_media) {
+                my_media.stop();
+            }
+            clearInterval(mediaTimer);
+            mediaTimer = null;
+        }
 
-//google.maps.event.addDomListener(window, 'load', initialize2);
+        // onSuccess Callback
+        //
+        function onSuccess() {
+            console.log("playAudio():Audio Success");
+        }
 
-    </script>
-  </head>
-  <body>
-    <div id="map-canvas"></div>
-    <div id="map"></div>
-    
-    
-    
-    
-    
-    
-    <div class="api-div" id="api-geolocation">
-<h2>Geolocation</h2>
-<style type="text/css">
-#map_near {
-	width: 280px; 
-	height: 240px; 
-	border: 2px solid #666;
- 	display: block;
- 	visibility: hidden; 
-	margin: 1.0em auto; 
-}
-</style>
-<div class="ui-block-b">
-<div data-role="button" onclick="getCurrentPosition();">Get Current</div>
-</div>
-</div>
+        // onError Callback 
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' + 
+                  'message: ' + error.message + '\n');
+        }
 
-<div id="cur_position_near">&nbsp;</div>
+        // Set audio position
+        // 
+        function setAudioPosition(position) {
+            document.getElementById('audio_position').innerHTML = position;
+        }
 
-<p><img id="map_near" /></p>
-<script>var getCurrentPosition = function() {
-    var success = function(pos) {                
-        var text = "<div>Latitude: " + pos.coords.latitude + 
-                    "<br/>" + "Longitude: " + pos.coords.longitude + "<br/>" + 
-                    "Accuracy: " + pos.coords.accuracy + "m<br/>" + "</div>";
-        $("#cur_position_near").html(text);
-        console.log(text);
-        
-        var mapwidth = parseInt($('#map_near').css("width"), 10);  // remove 'px' from width value
-        var mapheight = parseInt($('#map_near').css("height"), 10);
-        $('#map_near').css('visibility','visible');
-        
-        $('#map_near').attr('src', "http://maps.googleapis.com/maps/api/staticmap?center=" + 
-            pos.coords.latitude + "," + pos.coords.longitude + 
-            "&zoom=13&size=" + mapwidth + "x" + mapheight + "&maptype=roadmap&markers=color:green%7C" +
-            pos.coords.latitude + "," + pos.coords.longitude + "&sensor=false&key=AIzaSyB3WdAPmdVsmBW9MM9iZn-YDAxKiUy_E6U");
-
-        initialize2(pos.coords.latitude,pos.coords.longitude);
-        
-        
-    };
-    var fail = function(error) {
-        $("#cur_position_near").html("Error getting geolocation: " + error.code);
-        console.log("Error getting geolocation: code=" + error.code + " message=" + error.message);
-    };
-
-    $('#map_near').css('visibility','hidden');
-    $("#cur_position_near").html("Getting geolocation . . .");
-    console.log("Getting geolocation . . .");
-    navigator.geolocation.getCurrentPosition(success, fail);
-};</script>
-    
-
-    
-    
-  </body>
-</html>
+        </script>
+      </head>
+      <body>
+      <br><br>
+        <a href="#" class="btn large" onclick="playAudio('http://server8.20comunicacion.com:8120/;stream.nsv&amp;type=mp3&amp;volume=100&amp;autostart=true&amp;frontcolor=0x333333&amp;backcolor=0xCCCCCC&amp;lightcolor=0x000000');">Play Audio</a>
+        <br><br>
+        <a href="#" class="btn large" onclick="pauseAudio();">Pause Playing Audio</a>
+        &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+        <a href="#" class="btn large" onclick="stopAudio();">Stop Playing Audio</a>
+        <p id="audio_position"></p>
+      
+    </body></html>
