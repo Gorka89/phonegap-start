@@ -1,0 +1,43 @@
+<div id="navbar-main" class="snap-drawers drawers">
+
+    <div id="navbar-main-left" class="snap-drawer snap-drawer-left">
+        <div id="navbar-main-brand-wrapper">
+            <a id="navbar-main-brand" href="#!/">{{childuppName}}</a>
+        </div>
+
+        <ul id="navbar-main-sections" class="nav nav-vertical">
+            <li class="nav-opt" data-navbar-key="home"><a class="nav-opt-link" data-menu-toggleable="S" href="#!/">{{'HOME'|i18n}}</a></li>
+            <li ng-repeat="module in modules" class="nav-opt" ng-class="{'mod-active': module.available}" data-mod-key="{{ module.name }}" data-navbar-key="{{ module.name }}">
+                <a class="nav-opt-link" ng-href="#!/{{ module.name }}" ng-show="module.display != ''" data-menu-toggleable="S">{{ module.display }}</a>
+                <a class="nav-opt-link" ng-href="#!/{{ module.name }}" ng-show="module.display == ''" data-menu-toggleable="S">{{ module.name | i18n }}</a>
+            </li>
+        </ul>
+
+        <div id="navbar-main-powered" ng-show="showUppSignature">
+            {{'POWERED_BY'|i18n}}
+            <a class="nav-opt-link" href="http://www.upplication.com?utm_source=link-childupp" target="_blank">www.upplication.com</a>
+        </div>
+    </div>
+
+    <div id="navbar-main-right" class="snap-drawer snap-drawer-right">
+        <ul id="navbar-main-options"  class="nav nav-vertical" ng-show="account" ng-controller="upp.login.SigninCtrl">
+            <li id="register-menu" class="nav-opt" data-navbar-key="register" ng-show="!isLogged()">
+                <a id="register-btn" class="nav-opt-link" href="#!/register" data-menu-toggleable="S" >{{'LOGIN.REGISTER'|i18n}}</a>
+            </li>
+
+            <li id="signin-menu" class="nav-opt" ng-show="!isLogged()">
+                <a id="signin-btn" class="nav-opt-link" ng-click="openLogin()">{{'LOGIN.SIGNIN'|i18n}}</a>
+            </li>
+
+            <li id="user-menu" class="dropdown nav-opt" ng-class="{'hidden': !isLogged()}">
+                <a id="user-btn" class="dropdown-toggle nav-opt-link" data-toggle="dropdown" href="#"><span id="username_display">{{context.authentication.principal.username_display}}</span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a id="account-btn" data-menu-toggleable="S" href="#!/login/account">{{'LOGIN.ACCOUNT'|i18n}}</a></li>
+                    <li><a id="orders-btn" data-menu-toggleable="S" href="#!/account/orders">{{'MY-ORDERS.MENU'|i18n}}</a></li>
+                    <li><a id="my-bookings-btn" data-menu-toggleable="S" href="#!/account/bookings">{{ 'BOOKINGS.MENU' | i18n }}</a></li>
+                    <li><a id="signout-btn" ng-click="logout()">{{'LOGIN.SIGNOUT'|i18n}}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

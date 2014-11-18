@@ -1,0 +1,35 @@
+<div class="product-attributes-selector" ng-show="basket" ng-class="{'no-sizes':!hasSizes, 'sizes':hasSizes, 'no-colors':!hasColors, 'colors':hasColors, 'no-stock': noStock, 'stock': !noStock}">
+    <div ng-transclude></div>
+    <div class="product-attributes-selector-data">
+        <div class="item-section-row product-size" ng-show="hasSizes">
+            <label>
+                <span class="item-section-row-label span2">{{'PRODUCTS.PRODUCT.SIZE' | i18n}}:</span>
+                <select class="item-section-row-value span3" ng-model="size" ng-options="item.size for item in sizes" ng-required="hasSizes">
+                </select>
+            </label>
+        </div>
+        <div class="item-section-row product-color" ng-show="hasColors">
+            <label>
+                <span class="item-section-row-label span2">{{'PRODUCTS.PRODUCT.COLOR' | i18n}}:</span>
+                <select class="item-section-row-value span3" ng-model="color" ng-options="item.color.name for item in colors"
+                        ng-disabled="!colorMustBeEnabled()" ng-required="hasColors">
+                </select>
+                <button type="button" ng-show="color" class="color-icon hidden-phone"
+                        ng-style="{backgroundColor : color.color.colorHex}">&nbsp;</button>
+            </label>
+
+        </div>
+        <div class="item-section-row product-amount" ng-hide="noStock">
+            <label>
+                <span class="item-section-row-label span2">{{'PRODUCTS.PRODUCT.AMOUNT' | i18n}}:</span>
+                <input type="number" class="item-section-row-value span3" ng-model="amount" min="1" max="{{maxStock}}"
+                       ng-disabled="!amountMustBeEnabled()" required>
+            </label>
+        </div>
+    </div>
+    <div class="alert alert-warning product-no_stock" ng-show="noStock">
+        <span>{{'PRODUCTS.PRODUCT.NOSTOCK' | i18n}}</span>
+    </div>
+</div>
+
+

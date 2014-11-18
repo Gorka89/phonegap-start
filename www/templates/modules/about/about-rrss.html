@@ -1,0 +1,17 @@
+<about-current-page-tpl></about-current-page-tpl>
+
+<div ng-controller="upp.about.InfoCtrl" class="about-info page-content tabbable item">
+
+    <nav id="about-navbar">
+        <about-nav-bar-tpl data-tab="socialNetwork" data-info="info"></about-nav-bar-tpl>
+    </nav>
+
+    <ul id="about-tab-rrss" class="about-icon-list tab-pane" ng-show="info.socialNetworkEnabled">
+        <li ng-repeat="rrss in info.socialNetwork" class="item-box about-icon-item">
+            <a class="about-icon" ng-href="{{rrss.url}}" target="_blank">
+                <div class="about-icon-btn icon icon-2x" data-rrss-icon="{{rrss.font_code}}"></div>
+                <div class="about-icon-link">{{rrss.url}}</div>
+            </a>
+        </li>
+    </ul>
+</div>

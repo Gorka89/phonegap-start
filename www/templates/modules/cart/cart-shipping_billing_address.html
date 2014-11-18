@@ -1,0 +1,46 @@
+<div class="shipping-billing-address" ng-hide="hide">
+
+    <div class="cart-subaddress name control-group form-horizontal">
+        <label class="cart-subaddress-label control-label hidden-mini-phone" for="{{ addressType }}_name" >{{'ADDRESS.NAME' | i18n}}:</label>
+        <div class="controls">
+            <textarea id="{{ addressType }}_name" class="cart-subaddress-value span12 textarea-vert-resize placeholder-tooltip" ng-model="address.address" rows="6"  placeholder="{{'ADDRESS.NAME' | i18n}} ({{'REQUIRED' | i18n}})" ng-required="required">
+            </textarea>
+        </div>
+    </div>
+
+    <div class="cart-subaddress postal_code control-group form-horizontal">
+        <label class="cart-subaddress-label control-label hidden-mini-phone" for="{{ addressType }}_postal_code">{{'ADDRESS.POSTAL-CODE' | i18n}}:</label>
+
+        <div class="controls">
+            <input type="text" id="{{ addressType }}_postal_code" class="cart-subaddress-value span6 placeholder-tooltip" name="postalCode" ng-model="address.postalCode"
+                   placeholder="{{'ADDRESS.POSTAL-CODE' | i18n}} ({{'REQUIRED' | i18n}})" ng-required="required">
+        </div>
+    </div>
+
+    <div class="cart-subaddress city control-group form-horizontal">
+        <label class="cart-subaddress-label control-label hidden-mini-phone" for="{{ addressType }}_city">{{'ADDRESS.CITY' | i18n}}:</label>
+
+        <div class="controls">
+            <input type="text" id="{{ addressType }}_city" class="cart-subaddress-value span12 placeholder-tooltip" ng-model="address.city"
+                   placeholder="{{'ADDRESS.CITY' | i18n}} ({{'REQUIRED' | i18n}})" ng-required="required">
+        </div>
+    </div>
+
+    <div class="cart-subaddress state control-group form-horizontal">
+        <label class="cart-subaddress-label control-label hidden-mini-phone" for="{{ addressType }}_state" >{{'ADDRESS.STATE' | i18n}}:</label>
+
+        <div class="controls">
+            <input type="text" id="{{ addressType }}_state"  class="cart-subaddress-value span12 placeholder-tooltip" ng-model="address.state"
+                   placeholder="{{'ADDRESS.STATE' | i18n}} ({{'REQUIRED' | i18n}})" ng-required="required">
+        </div>
+    </div>
+
+    <div class="cart-subaddress country control-group form-horizontal">
+        <label class="cart-subaddress-label control-label hidden-mini-phone" for="{{ addressType }}_country">{{'ADDRESS.COUNTRY' | i18n}}:</label>
+
+        <div class="controls">
+            <input type="text" id="{{ addressType }}_country"  class="cart-subaddress-value span12 placeholder-tooltip" ng-model="address.country"
+                   placeholder="{{'ADDRESS.COUNTRY' | i18n}} ({{'REQUIRED' | i18n}})" ng-required="required">
+        </div>
+    </div>
+</div>

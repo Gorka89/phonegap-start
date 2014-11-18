@@ -1,0 +1,32 @@
+<div id="account" class="page" ng-controller="upp.login.AccountCtrl">
+
+    <current-page-tpl
+            data-page-title="LOGIN.ACCOUNT.HEADER">
+    </current-page-tpl>
+
+
+    <form name="form" class="css-form page-content item form-horizontal" novalidate>
+
+        <div class="account-update-error alert alert-error alert-block" ng-show="updateError && !updateOk">
+            <p><strong>{{updateError.title}}</strong> {{updateError.msg}}</p>
+        </div>
+
+        <div class="account-update-ok alert alert-success alert-block" ng-show="updateOk && !updateError">
+            <p><strong>{{'LOGIN.ACCOUNT.OK'|i18n}}</strong></p>
+        </div>
+
+        <user-data-tpl data-fields-ro="email"></user-data-tpl>
+
+        <div class="item-footer row-fluid">
+            <button id="account-delete-btn" class="btn btn-remove" ng-click="delete()">
+                {{'LOGIN.ACCOUNT.DELETE-ACCOUNT'|i18n}}
+            </button>
+
+            <button id="account-save-btn" class="btn btn-submit" ng-click="update(form.$valid)" ng-disabled="form.$pristine">
+                {{'LOGIN.ACCOUNT.UPDATE-ACCOUNT'|i18n}}
+            </button>
+        </div>
+
+    </form>
+
+</div>

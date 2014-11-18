@@ -1,0 +1,37 @@
+<current-page-tpl
+        data-page-title="ESHOP.KEY"
+        data-page-key="eshop">
+</current-page-tpl>
+
+<div id='eshop-catalog' class="eshop page-content" ng-controller='upp.eshop.CatalogCtrl'>
+
+    <products-category-filter-tpl
+            data-filter-func='filterByCategory'>
+    </products-category-filter-tpl>
+
+    <products-attributes-filter-tpl></products-attributes-filter-tpl>
+
+    <div class="alert alert-warning no_products-warning" ng-show="loaded && products.length < 1">
+        <span>{{'ESHOP.NO-PRODUCTS'|i18n}}</span>
+    </div>
+
+    <!-- inject 'products-catalog.html' -->
+    <products-catalog-tpl
+            data-infinite-scroll-func='retrieveMoreProducts()'
+            data-infinite-scroll-without-init-when='loaded'
+            data-infinite-scroll-without-stop-when='!more'
+            data-infinite-scroll-busy='busy'
+            data-infinite-scroll-more-button='more'
+            >
+    </products-catalog-tpl>
+
+
+    <!-- TODO
+    <products-catalog-tpl
+            data-infinite-scroll="true"
+            data-list-func="listProducts">
+    </products-catalog-tpl>
+    -->
+
+</div>
+

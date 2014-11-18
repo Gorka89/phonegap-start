@@ -1,0 +1,29 @@
+<div id="register" class="page" ng-controller="upp.login.RegisterCtrl">
+
+    <current-page-tpl
+            data-page-title="LOGIN.REGISTER.HEADER">
+    </current-page-tpl>
+
+    <form name="form" class="page-content item form-horizontal css-form" ng-submit="register(form.$valid)" novalidate>
+
+        <div class="register-error alert alert-error alert-block" ng-show="registerError">
+            <p><strong>{{registerError.title}}</strong> {{registerError.msg}}</p>
+        </div>
+
+        <user-data-tpl data-require-captcha="true"></user-data-tpl>
+
+        <div class="item-footer">
+
+            <label id="agree-terms"><input type="checkbox" id="agree-terms-check" name="agree-terms-check"
+                                           ng-model="agreeTerms"/>{{'LOGIN.REGISTER.TERMS.TEXT'|i18n}}<a
+                    href="#!/about/policy" target="_blank">{{'LOGIN.REGISTER.TERMS.LINK'|i18n}}</a></label>
+
+            <button id="create-account-btn" type="submit" class="btn btn-submit" ng-disabled="!agreeTerms">
+                {{'LOGIN.REGISTER.CREATE-ACCOUNT'|i18n}}
+            </button>
+
+        </div>
+    </form>
+
+</div>
+

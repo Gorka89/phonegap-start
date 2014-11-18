@@ -1,0 +1,12 @@
+<about-current-page-tpl></about-current-page-tpl>
+
+<div class="about-info page-content tabbable item" ng-controller="upp.about.InfoCtrl">
+
+    <nav id="about-navbar">
+        <about-nav-bar-tpl data-tab="who" data-info="info"></about-nav-bar-tpl>
+    </nav>
+
+
+    <section id="about-tab-who" class="about-description-text tab-pane item-box" ng-bind-html="info.description" ng-show="info.whoEnabled"></section>
+
+</div>

@@ -1,0 +1,21 @@
+<div class="catalog-category-filter catalog-filter grid item" ng-show="categories && categories.length">
+    <div class="catalog-category-filter-category two-cols-tablet">
+        <label class="catalog-filter-label" for="category">
+            {{'PRODUCTS.FILTERS.CATEGORY.LABEL' | i18n}}:
+        </label>
+        <select id="category" class="catalog-filter-value" ng-model="category" ng-options="category.name for category in categories"
+                ng-change="selectCategory(category);filter(category);">
+            <option value="">{{'PRODUCTS.FILTERS.CATEGORY.DEFAULT' | i18n}}</option>
+        </select>
+    </div>
+    <div class="catalog-category-filter-subcategory two-cols-tablet" ng-show="category">
+        <label class="catalog-filter-label" for="subcategory">
+            {{'PRODUCTS.FILTERS.SUBCATEGORY.LABEL' | i18n}}:
+        </label>
+        <select id="subcategory" class="catalog-filter-value" ng-model="subcategory" ng-options="subcategory.name for subcategory in subcategories"
+                ng-change="selectSubcategory(subcategory);filter(subcategory);">
+            <option value="">{{'PRODUCTS.FILTERS.SUBCATEGORY.DEFAULT' | i18n}}</option>
+        </select>
+
+    </div>
+</div>

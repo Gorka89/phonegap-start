@@ -1,0 +1,90 @@
+<cart-current-page-tpl></cart-current-page-tpl>
+
+<div id="cart-order" class="cart page-content" ng-controller="upp.cart.OrderCtrl">
+
+    <div class="alert alert-warning cart_empty-warning" ng-show="loaded && order.length < 1">
+        <p><strong>{{'CART.EMPTY-CART' | i18n}}</strong></p>
+    </div>
+
+    <form name="form" class="css-form" ng-show="loaded && order.length > 0" novalidate>
+
+        <cart-breadcrumb-tpl
+                data-cart-step="order"
+                data-next-disabled="form.$invalid">
+        </cart-breadcrumb-tpl>
+
+        <ul class="cart-order-list">
+            <li ng-repeat="product in order" class="product in-cart cart-order-product item">
+                <h2 class="product-name item-header">{{product.name}}</h2>
+                <div class="row-fluid item-section">
+
+                    <div class="product-preview cart-order-product-preview span3"
+                         ng-style="{'background':'white url(' + product.preview + ') no-repeat center', '-webkit-background-size':'cover', '-moz-background-size':'cover', '-o-background-size':'cover', 'background-size':'cover'}"></div>
+
+                    <div class="cart-order-product-info span9">
+                        <div class="cart-order-product-detail">
+                            <products-prices-tpl
+                                    data-price="product.price"
+                                    data-currency="currency.display"
+                                    data-promotions="product.promotions">
+                            </products-prices-tpl>
+                            <div class="cart-order-product-amount_and_price">
+                                x {{product.prices.amount|number}} = <strong>{{product.prices.totalPriceWithTaxes|number:2}}&nbsp;<currency-tpl data-currency-symbol="currency.display"></currency-tpl></strong> <!-- DO NOT SPLIT THIS SENTENCE-->
+                            </div>
+                        </div>
+
+                        <products-product-attributes-selector-tpl class="control-group clearfix"
+                                data-amount="product.selectedStock"
+                                data-max-stock="product.maxStock"
+                                data-attribute="product.selectedAttribute"
+                                data-attributes="product.attributes"
+                                data-no-stock="product.noStock">
+                        </products-product-attributes-selector-tpl>
+
+                    </div>
+                </div>
+                <div class="item-footer">
+                    <button class="btn remove cart-order-product-remove" ng-click="removeFromOrder(product)">&nbsp;{{'CART.ORDER.REMOVE'| i18n}}</button>
+                </div>
+            </li>
+        </ul>
+
+        <div id="cart-order-prices" class="cart-order-prices item">
+            <div class="cart-order-prices-total">
+                <div class="cart-order-prices-text">{{'CART.ORDER.PRICES.TOTAL'|i18n}}:</div>
+                <div class="cart-order-prices-amount">{{prices.total|number:2}}&nbsp;
+                    <currency-tpl data-currency-symbol="currency.display"></currency-tpl>
+                </div>
+            </div>
+            <div class="cart-order-prices-taxes">
+                <div class="cart-order-prices-text">{{'CART.ORDER.PRICES.TAXES'|i18n}}:</div>
+                <div class="cart-order-prices-amount">{{prices.taxes|number:2}}&nbsp;
+                    <currency-tpl data-currency-symbol="currency.display"></currency-tpl>
+                </div>
+            </div>
+
+            <div class="cart-order-prices-shipping-charges" ng-show="prices.shippingCharges != undefined">
+                <div class="cart-order-prices-text">{{'CART.ORDER.PRICES.SHIPPING-CHARGES'|i18n}}:</div>
+                <div class="cart-order-prices-amount">{{prices.shippingCharges|number:2}}&nbsp;
+                    <currency-tpl data-currency-symbol="currency.display"></currency-tpl>
+                </div>
+            </div>
+            <div class="cart-order-prices-total-with-taxes">
+                <div class="cart-order-prices-text">{{'CART.ORDER.PRICES.TOTALWITHTAXES'|i18n}}:</div>
+                <div class="cart-order-prices-amount">{{prices.totalPriceWithShippingCharges|number:2}}&nbsp;
+                    <currency-tpl data-currency-symbol="currency.display"></currency-tpl>
+                </div>
+            </div>
+
+        </div>
+
+        <cart-breadcrumb-tpl
+                data-cart-step="order"
+                data-next-disabled="form.$invalid">
+        </cart-breadcrumb-tpl>
+
+    </form>
+
+</div>
+
+

@@ -1,0 +1,9 @@
+<div id="modal-msg" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true">
+    <button type="button" class="btn close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="modal-header" ng-show="title">{{title | i18n}}</h3>
+    <p class="modal-body" ng-bind-html="message"></p>
+    <div class="modal-footer">
+        <button class="btn confirm" data-dismiss="modal" aria-hidden="true" ng-show="confirmButton" ng-click="confirm()">{{confirmButton.text | i18n}}</button>
+        <button class="btn cancel" data-dismiss="modal" aria-hidden="true" ng-click="close()">{{closeButton.text | i18n}}</button>
+    </div>
+</div>

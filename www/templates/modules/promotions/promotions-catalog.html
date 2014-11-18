@@ -1,0 +1,16 @@
+<current-page-tpl
+        data-page-title="PROMOTIONS.KEY"
+        data-page-key="promotions">
+</current-page-tpl>
+
+<div id="promotions-catalog" class="promotions page-content" ng-controller="upp.promotions.CatalogCtrl">
+
+    <div class="alert alert-warning no_products-warning" ng-show="loaded && products.length < 1">
+        <span>{{'PROMOTIONS.NO-PROMOTIONS'|i18n}}</span>
+    </div>
+
+    <!-- inject 'product-catalog.html' -->
+    <products-catalog-tpl></products-catalog-tpl>
+
+</div>
+

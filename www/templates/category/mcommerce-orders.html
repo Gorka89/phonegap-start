@@ -1,0 +1,118 @@
+<div id="orders" class="page" ng-controller="upp.categories.mcommerce.OrdersCtrl">
+
+    <current-page-tpl
+            data-page-title="MCOMMERCE.MY-ORDERS.TITLE">
+    </current-page-tpl>
+
+    <div class="page-content">
+
+        <div class="orders-list-warning-no-order alert alert-block alert-warning" ng-show="loaded && (!orders || orders.length < 1)">
+            <p>{{'MCOMMERCE.MY-ORDERS.NO-ORDER'|i18n}}</p>
+        </div>
+
+        <div class="orders-list item"  ng-show="loaded && orders.length > 0">
+
+            <div class="orders-list-header row-fluid">
+                <div class="orders-list-date span4">{{'MCOMMERCE.MY-ORDERS.DATE'|i18n}}</div>
+                <div class="orders-list-price span4">{{'MCOMMERCE.MY-ORDERS.PRICE'|i18n}}</div>
+                <div class="orders-list-sent span4">{{'MCOMMERCE.MY-ORDERS.SENT'|i18n}}</div>
+            </div>
+
+            <ul class="orders-list-items">
+
+                <li class="orders-list-item {{order.sent &&'sent'||'not-sent'}} row-fluid item-box " ng-repeat="order in orders" ng-click="openDetail(order)">
+
+                    <div class="order-header">
+                        <div class="span4 order-header-date-wrapper">
+                            <div class="order-caret"><i
+                                    class="{{order.showDetail &&'icon-caret-up'||'icon-caret-down'}}"></i></div>
+                            <div class="order-header-date" data-title="{{'MCOMMERCE.MY-ORDERS.DATE'|i18n}}">
+                                {{order.date|date:fullDate}}
+                            </div>
+                        </div>
+                        <div class="order-header-price span4" data-title="{{'MCOMMERCE.MY-ORDERS.PRICE'|i18n}}">
+                            {{order.price|number:2}}&nbsp;
+                            <currency-tpl data-currency-symbol="order.currency.display"></currency-tpl>
+                        </div>
+                        <div class="order-header-sent span4" data-title="{{'MCOMMERCE.MY-ORDERS.SENT'|i18n}}">
+                            <i class="{{order.sent &&'icon-checkmark'||'icon-close'}}"></i>
+                        </div>
+                    </div>
+
+                    <div class="grid order-detail {{(order.detailed && order.showDetail) &&'active'||'inactive'}}">
+                        <div class="order-detail-addresses two-cols-desktop">
+                            <div class="order-detail-paymentmodel" data-title="{{'MCOMMERCE.MY-ORDERS.PAYMENT_METHOD'|i18n}}">
+                                <span ng-show="order.paymentModel == $PAYMENT_PAYPAL">{{'MCOMMERCE.MY-ORDERS.PAID_WITH_PAYPAL'|i18n}}</span>
+                                <span ng-show="order.paymentModel == $PAYMENT_REFUND">{{'MCOMMERCE.MY-ORDERS.PAY_ON_DELIVERY'|i18n}}</span>
+                            </div>
+
+                            <div class="order-detail-shipping" ng-show="order.sendAddress" data-title="{{'MCOMMERCE.MY-ORDERS.SHIPPING'|i18n}}">
+                                {{order.sendAddress.address}}, {{order.sendAddress.postalCode}},
+                                {{order.sendAddress.city}}, {{order.sendAddress.state}}, {{order.sendAddress.country}}
+                            </div>
+
+                            <div class="order-detail-billing" data-title="{{'MCOMMERCE.MY-ORDERS.BILLING'|i18n}}">
+                                {{order.billingAddress.address}}, {{order.billingAddress.postalCode}},
+                                {{order.billingAddress.city}}, {{order.billingAddress.state}},
+                                {{order.billingAddress.country}}
+                            </div>
+
+                            <div class="order-detail-observations" ng-show="order.notes"
+                                 data-title="{{'MCOMMERCE.MY-ORDERS.OBSERVATIONS'|i18n}}">{{order.notes}}
+                            </div>
+                        </div>
+                        <div class="order-detail-summary two-cols-desktop">
+                            <div class="order-detail-summary-header row-fluid">
+                                <div class="span2">{{'MCOMMERCE.MY-ORDERS.AMOUNT'|i18n}}</div>
+                                <div class="span3">{{'MCOMMERCE.MY-ORDERS.PRODUCT'|i18n}}</div>
+                                <div class="span1">{{'MCOMMERCE.MY-ORDERS.SIZE'|i18n}}</div>
+                                <div class="span2">{{'MCOMMERCE.MY-ORDERS.COLOR'|i18n}}</div>
+                                <div class="span2">{{'MCOMMERCE.MY-ORDERS.UNIT-PRICE'|i18n}}</div>
+                                <div class="span2">{{'MCOMMERCE.MY-ORDERS.TOTAL-PRICE'|i18n}}</div>
+                            </div>
+                            <div class="order-detail-summary-body row-fluid">
+                                <div class="order-detail-summary-body-product" ng-repeat="product in order.products">
+                                    <div class="span2" data-title="{{'MCOMMERCE.MY-ORDERS.AMOUNT'|i18n}}">
+                                        {{product.amount}}
+                                    </div>
+                                    <div class="span3" data-title="{{'MCOMMERCE.MY-ORDERS.PRODUCT'|i18n}}">
+                                        {{product.name}}
+                                    </div>
+                                    <div class="span1" ng-class="{'no-size': !product.size}" data-title="{{'MCOMMERCE.MY-ORDERS.SIZE'|i18n}}">
+                                        {{product.size}}
+                                    </div>
+                                    <div class="span2" ng-class="{'no-color': !product.color.name}"  data-title="{{'MCOMMERCE.MY-ORDERS.COLOR'|i18n}}">
+                                        {{product.color.name}}
+                                    </div>
+                                    <div class="span2" data-title="{{'MCOMMERCE.MY-ORDERS.UNIT-PRICE'|i18n}}">
+                                        {{product.price|number:2}}&nbsp;
+                                        <currency-tpl data-currency-symbol="order.currency.display"></currency-tpl>
+                                    </div>
+                                    <div class="span2" data-title="{{'MCOMMERCE.MY-ORDERS.TOTAL-PRICE'|i18n}}">
+                                        {{product.totalPrice|number:2}}&nbsp;
+                                        <currency-tpl data-currency-symbol="order.currency.display"></currency-tpl>
+                                    </div>
+                                </div>
+                                <div class="order-detail-summary-body-shipping" ng-show="order.shippingCharges != undefined" >
+                                    <div class="shipping-label span10">{{'MCOMMERCE.MY-ORDERS.SHIPPING-CHARGES'|i18n}}</div>
+                                    <div class="shipping-value span2">
+                                        {{order.shippingCharges|number:2}}&nbsp;
+                                        <currency-tpl data-currency-symbol="order.currency.display"></currency-tpl>
+                                    </div>
+                                </div>
+                                <div class="order-detail-summary-body-total" >
+                                    <div class="span10">{{'MCOMMERCE.MY-ORDERS.TOTAL-PRICE'|i18n}}</div>
+                                    <div class="span2">
+                                        {{order.price|number:2}}&nbsp;
+                                        <currency-tpl data-currency-symbol="order.currency.display"></currency-tpl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

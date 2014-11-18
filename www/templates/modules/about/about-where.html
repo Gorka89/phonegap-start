@@ -1,0 +1,20 @@
+<about-current-page-tpl></about-current-page-tpl>
+
+<div class="about-info page-content tabbable item" ng-controller="upp.about.InfoCtrl">
+
+    <nav id="about-navbar">
+        <about-nav-bar-tpl data-tab="location" data-info="info"></about-nav-bar-tpl>
+    </nav>
+    <ul class="tab-pane" id="about-tab-where" ng-show="info.locationEnabled">
+        <li class="about-where-localization item-box" ng-repeat="loc in info.locations">
+            <h2 class="about-where-localization-description ellipsis-text">{{loc.description}}</h2>
+
+            <iframe class="iframe about-where-localization-iframe" frameborder="0" scrolling="no" marginheight="0"
+                    marginwidth="0"
+                    ng-src="{{ loc.url | embedGoogleMap }}"></iframe>
+
+
+            <a class="about-where-localization-btn btn" ng-href="{{loc.url}}" target="_blank">{{'ABOUT.INFO.WHERE.OPEN'|i18n}}</a>
+        </li>
+    </ul>
+</div>

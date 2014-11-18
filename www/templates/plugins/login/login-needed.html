@@ -1,0 +1,11 @@
+<div id="login-needed" ng-controller="upp.login.SigninCtrl">
+    <div class="alert alert-error login-needed-error without_section-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <p><strong>{{'LOGIN.NEEDED.TITLE' | i18n}}</strong> {{'LOGIN.NEEDED.MSG' | i18n}}</p>
+    </div>
+    <div class="center-wrapper">
+        <button type="button" id="go-to-login-btn" class="btn btn-primary" ng-click="openLogin(true)">
+            {{'LOGIN.GOTOLOGIN' | i18n}}
+        </button>
+    </div>
+</div>

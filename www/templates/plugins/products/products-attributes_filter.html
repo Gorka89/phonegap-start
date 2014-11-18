@@ -1,0 +1,20 @@
+<div class="item catalog-filter catalog-name-filter grid">
+    <div class="two-cols-tablet catalog-name-filter-name">
+        <label class="catalog-filter-label" for="nameFilter">
+            {{'PRODUCTS.FILTERS.NAME.LABEL' | i18n}}:
+        </label>
+        <input type="text" id="nameFilter" class="catalog-filter-value" ng-model="filters.name" ng-change="updateFiltersCache()"
+               ng-keydown="updateFiltersCache()" placeholder="{{'PRODUCTS.FILTERS.NAME.PLACEHOLDER' | i18n}}"/>
+    </div>
+    <div class="two-cols-tablet catalog-filter-price" ng-show="allProductsProductsHavePrice()">
+        <label class="catalog-filter-label" for="price">
+            {{'PRODUCTS.FILTERS.PRICE.LABEL' | i18n}}:
+        </label>
+        <select id="price" class="catalog-filter-value" ng-model="priceFilter"
+                ng-change="setOrder(priceFilter)">
+            <option value="">{{'PRODUCTS.FILTERS.PRICE.DEFAULT' | i18n}}</option>
+            <option value="DESC">{{ 'PRODUCTS.FILTERS.PRICE.DESC' | i18n }}</option>
+            <option value="ASC">{{ 'PRODUCTS.FILTERS.PRICE.ASC' | i18n }}</option>
+        </select>
+    </div>
+</div>

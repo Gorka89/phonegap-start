@@ -1,0 +1,76 @@
+<current-page-tpl
+        data-page-title="ESHOP.KEY"
+        data-page-key="eshop">
+</current-page-tpl>
+
+<article id="product-detail" class="eshop product detail item page-content"  ng-class="{'without-stock': product.noStock, 'with-stock': !product.noStock}" ng-controller="upp.eshop.ProductCtrl"  ng-show="loaded">
+
+    <form class="css-form product-detail-form" ng-submit="add2cart(product)">
+
+        <header class="item-header">
+            <h2 class="product-name">{{product.name}}</h2>
+        </header>
+
+        <section class="item-section row-fluid product-info">
+
+            <div class="span4 product-images" data-snap-ignore="true">
+                <div class="preview-carousel-slider product-slider" data-images="product.files" data-preview-type="slider"></div>
+                <div class="preview-carousel-slider product-carousel hidden-phone" data-images="product.files"
+                     data-preview-type="carousel"></div>
+            </div>
+
+            <div class="span8 product-info-detail">
+
+                <products-prices-tpl class="control-group"
+                                            data-price="product.price"
+                                            data-currency="currency.display"
+                                            data-promotions="product.promotions">
+                </products-prices-tpl>
+
+                <div class="item-section-row product-description"
+                     ng-bind-html="product.description" ng-show="product.description"></div>
+
+                <div class="item-section-row product-categories" ng-show="product.category && product.category.name.length">
+                    <label class="item-section-row-label span2">{{'PRODUCTS.CATEGORY' | i18n}}:</label>
+                    <div class="item-section-row-value">
+                        <span class="label product-categories-category">{{product.category.name}}</span>
+                        <span class="label product-categories-category" ng-repeat="subcategory in product.category.children">{{subcategory.name}}</span>
+                    </div>
+                </div>
+
+                <div class="item-section-row product-brand" ng-show="product.brand.name">
+                    <label class="item-section-row-label span2">{{'PRODUCTS.BRAND' | i18n}}:</label>
+                    <span class="item-section-row-value">{{product.brand.name}}</span>
+                </div>
+
+                <div class="item-section-row product-features" ng-show="product.features.length > 0">
+                    <label class="item-section-row-label span2">{{'PRODUCTS.FEATURES' | i18n}}:</label>
+
+                    <div class="product-features-feature form-inline item-section-row-value" ng-repeat="feature in product.features">
+                        <img class="img product-features-feature-icon" ng-src="{{feature.image}}" alt="{{feature.description}}"><span>{{feature.description}}</span>
+                    </div>
+                </div>
+
+                <div class="item-section-row product-tags" ng-show="product.tags.length > 0">
+                    <label class="item-section-row-label span2">{{'PRODUCTS.TAGS' | i18n}}:</label>
+                    <div class="item-section-row-value">
+                        <span class="label label-info product-tags-tag" ng-repeat="tag in product.tags">{{tag}}</span>
+                    </div>
+                </div>
+
+                <products-product-attributes-selector-tpl ng-if="product.goToBasket" class="product-attributes-selector clearfix"
+                                                                 data-basket="product.goToBasket"
+                                                                 data-amount="product.selectedStock"
+                                                                 data-attribute="product.selectedAttribute"
+                                                                 data-max-stock="product.maxStock"
+                                                                 data-attributes="product.attributes"
+                                                                 data-no-stock="product.noStock">
+                </products-product-attributes-selector-tpl>
+            </div>
+        </section>
+        <footer class="item-footer center-wrapper" ng-hide="product.noStock">
+            <add-to-cart-btn-tpl ng-show="product.goToBasket"></add-to-cart-btn-tpl>
+        </footer>
+    </form>
+</article>
+

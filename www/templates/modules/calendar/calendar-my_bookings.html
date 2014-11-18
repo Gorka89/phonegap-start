@@ -1,0 +1,74 @@
+<div class="page my-bookings" ng-controller="upp.calendar.MyBookingsCtrl">
+
+    <current-page-tpl
+            data-page-title="CALENDAR.MY_BOOKINGS">
+    </current-page-tpl>
+
+    <div id="my-bookings" class="calendar bookings-list page-content">
+        <div class="orders-list-warning-no-order alert alert-block alert-warning"
+             ng-show="loaded && (!bookings || bookings.length < 1)">
+            <p>{{'CALENDAR.NO-BOOKINGS'|i18n}}</p>
+        </div>
+
+        <div class="orders-list item" ng-show="loaded && bookings.length > 0">
+            <div class="catalog-category-filter-category">
+                <select id="calendars" ng-model="calendarSelected"
+                        ng-options="calendar.id as calendar.name for calendar in calendars"
+                        ng-change="selectCalendar(calendar)">
+                    <option value="">-- {{ 'ALL_CALENDARS' | i18n }} --</option>
+                </select>
+            </div>
+
+            <div class="orders-list-header row-fluid">
+                <div class="span3">{{'CALENDAR.CALENDAR'|i18n}}</div>
+                <div class="span3">{{'CALENDAR.DATE'|i18n}}</div>
+                <div class="span2">{{'CALENDAR.INTERVAL'|i18n}}</div>
+                <div class="span2">{{'CALENDAR.ATTENDANTS'|i18n}}</div>
+                <div class="span2">{{'CALENDAR.STATUS'|i18n}}</div>
+            </div>
+
+            <ul class="orders-list-items">
+                <li ng-show="!calendarSelected || calendarSelected == booking.calendarId"
+                    class="orders-list-item booking-list-item row-fluid item-box "
+                    ng-repeat="booking in bookings" ng-click="openDetail(booking)" ng-class="{'booking-past': booking.past, 'booking-accepted': booking.status == 1, 'booking-denied': booking.status == 2 || booking.status == 3}">
+
+                    <div class="order-header">
+                        <div class="span3 order-header-date-wrapper">
+                            <div class="order-caret"><i
+                                    class="{{booking.showDetail &&'icon-caret-up'||'icon-caret-down'}}"></i></div>
+                            <div class="order-header-calendar" data-title="{{'CALENDAR.CALENDAR'|i18n}}">
+                                {{ booking.calendarName }}
+                            </div>
+                        </div>
+                        <div class="order-header-date span3" data-title="{{'CALENDAR.DATE'|i18n}}">
+                            {{ booking.day | date:fullDate }}
+                        </div>
+                        <div class="order-header-interval span2" data-title="{{'CALENDAR.INTERVAL'|i18n}}">
+                            {{ booking.hourStart }} - {{ booking.hourEnd }}
+                        </div>
+                        <div class="order-header-attendants span2" data-title="{{'CALENDAR.ATTENDANTS'|i18n}}">
+                            {{ booking.attendants }}
+                        </div>
+                        <div class="order-header-status span2" data-title="{{'CALENDAR.STATUS'|i18n}}" ng-switch="booking.status">
+                            <span ng-switch-when="0">{{ 'CALENDAR.PENDING' | i18n }}</span>
+                            <span ng-switch-when="1">{{ 'CALENDAR.ACCEPTED' | i18n }}</span>
+                            <span ng-switch-when="2">{{ 'CALENDAR.CREATOR_DENIED' | i18n }}</span>
+                            <span ng-switch-when="3">{{ 'CALENDAR.USER_DENIED' | i18n }}</span>
+                        </div>
+                    </div>
+
+                    <div class="grid order-detail {{ booking.showDetail && 'active' || 'inactive' }}">
+                        <div class="order-detail-comments" ng-show="booking.comments"
+                             data-title="{{'CALENDAR.COMMENTS'|i18n}}">
+                            {{ booking.comments }}
+                        </div>
+                        <div ng-show="(booking.status == 0 || booking.status == 1) && !booking.past" class="booking-cancel">
+                            <button class="btn btn-danger" ng-click="cancelBooking(booking)">{{ 'CALENDAR.CANCEL_RESERVATION' | i18n }}</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

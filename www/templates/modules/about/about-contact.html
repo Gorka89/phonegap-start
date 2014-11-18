@@ -1,0 +1,24 @@
+<about-current-page-tpl></about-current-page-tpl>
+
+<div class="about-info page-content tabbable item" ng-controller="upp.about.InfoCtrl" >
+
+    <nav id="about-navbar">
+        <about-nav-bar-tpl data-tab="contact" data-info="info"></about-nav-bar-tpl>
+    </nav>
+
+    <ul id="about-tab-contact" class="about-icon-list tab-pane" ng-show="info.contactEnabled">
+        <li id="about-contact-phone" class="item-box about-icon-item" ng-show="info.phone">
+            <a class="about-icon" href="tel:{{info.phone}}" target="_blank">
+                <div class="about-icon-btn icon icon-2x rrss-icon rrss-icon-phone"></div>
+                <div class="about-icon-link">{{info.phone}}</div>
+            </a>
+        </li>
+        <li id="about-contact-email" class="item-box about-icon-item" ng-show="info.email">
+            <a class="about-icon" href="mailto:{{info.email}}" target="_top">
+                <div class="about-icon-btn icon icon-2x rrss-icon rrss-icon-email"></div>
+                <div class="about-icon-link">{{info.email}}</div>
+            </a>
+        </li>
+    </ul>
+
+</div>

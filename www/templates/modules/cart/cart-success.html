@@ -1,0 +1,13 @@
+<cart-current-page-tpl></cart-current-page-tpl>
+
+<div id="cart-success" class="cart cart-payment-status success page-content item" ng-controller="upp.cart.SuccessCtrl" >
+
+    <h2 class="cart-payment-status-title item-header" ng-show="paymentModel == PAYMENT_PAYPAL">{{'CART.PAYMENT.SUCCESS.TITLE'|i18n}}</h2>
+    <h2 class="cart-payment-status-title item-header" ng-show="paymentModel == PAYMENT_REFUND">{{'CART.PAYMENT.SUCCESS.TITLE_REFUND'|i18n}}</h2>
+
+    <p class="cart-payment-status-msg" ng-show="paymentModel == PAYMENT_PAYPAL">{{'CART.PAYMENT.SUCCESS.MSG'|i18n}}</p>
+    <p class="cart-payment-status-msg" ng-show="paymentModel == PAYMENT_REFUND">{{'CART.PAYMENT.SUCCESS.MSG_REFUND'|i18n}}</p>
+
+</div>
+
+

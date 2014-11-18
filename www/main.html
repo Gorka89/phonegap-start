@@ -1,0 +1,94 @@
+<!DOCTYPE html><!--[if lt IE 7]><html ng-app="upp" class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html ng-app="upp" class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html ng-app="upp" class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><html ng-app="upp" class="no-js"><![endif]-->
+<html ng-app="upp" ng-controller="upp.MainCtrl">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <script type="text/javascript">document.write("<base href=\"" + document.location + "\" />")</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link id="baseCss" rel="stylesheet" type="text/css" href="css/app/main.css">
+    <link id="templateCss" rel="stylesheet" type="text/css" href="css/app/template.css">
+    <script type="text/javascript">window.nameapp = 'Belotea';</script>
+  </head>
+  <body ng-class="{'upp-error' : error}" class="main-body">
+    <ios-status-bar></ios-status-bar>
+    <modal-spin-tpl></modal-spin-tpl>
+    <modal-login-tpl></modal-login-tpl>
+    <modal-message-tpl></modal-message-tpl>
+    <modal-email-restore-tpl></modal-email-restore-tpl>
+    <modal-change-password-tpl></modal-change-password-tpl>
+    <modal-user-activated-success-tpl></modal-user-activated-success-tpl>
+    <div id="page-rrss-icons">
+      <rrss-icons-tpl data-hide-eshop="true"></rrss-icons-tpl>
+    </div>
+    <side-navbar-tpl></side-navbar-tpl>
+    <div id="navbar-mobile-top">
+      <div id="navbar-mobile-top-left-icon" class="navbar-mobile-icon icon-list"></div>
+      <div id="navbar-mobile-top-back" class="navbar-mobile-icon icon-chevron-left"></div>
+      <div id="navbar-mobile-top-current-section">Home</div>
+      <div id="navbar-mobile-top-brand" ng-cloak>{{childuppName}}</div>
+      <div id="navbar-mobile-top-right-icon" class="navbar-mobile-icon icon-settings"></div>
+    </div>
+    <div id="main-container" class="snap-content">
+      <div id="app-background"></div>
+      <div id="content-wrapper" style="" class="overthrow">
+        <error-message-tpl></error-message-tpl>
+        <div id="content" ng-view></div>
+      </div>
+      <ad-banner-tpl></ad-banner-tpl>
+    </div>
+  </body>
+  <script src="lib/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  <script src="lib/jquery/jquery-1.9.0.min.js"></script>
+  <script src="lib/overthrow/overthrow.min.js"></script>
+  <script src="lib/bootstrap/bootstrap.min.js"></script>
+  <script src="lib/plugins.min.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular/angular-resource.min.js"></script>
+  <script src="lib/angular/angular-sanitize.min.js"></script>
+  <script src="lib/angular/angular-route.min.js"></script>
+  <script src="lib/angular-dynamic-locale/tmhDinamicLocale.min.js"></script>
+  <script src="lib/jquery/jquery.cookie.min.js"></script>
+  <script src="lib/spin/spin.min.js"></script>
+  <script src="lib/spin/jquery.spin.min.js"></script>
+  <script src="lib/jquery/jquery.flexslider-min.js"></script>
+  <script src="lib/snap/snap.min.js"></script>
+  <script src="lib/fastclick/fastclick.min.js"></script>
+  <script src="js/app/properties.js"></script>
+  <script src="js/app/app.compiled.min.js"></script>
+  <script type="text/javascript">
+    (function(props){
+        if (props.PHONEGAP){
+            var fileref = document.createElement('script');
+            fileref.setAttribute("type","text/javascript");
+            fileref.setAttribute("src", "cordova.js");
+            document.getElementsByTagName("head")[0].appendChild(fileref);
+        }
+    })($UPP.PROPS);
+    
+    
+  </script>      <script src="js/modules/eshop/eshop.compiled.min.js"></script>
+      <script src="js/modules/calendar/calendar.compiled.min.js"></script>
+      <script src="js/modules/about/about.compiled.min.js"></script>
+      <script src="js/modules/cart/cart.compiled.min.js"></script>
+      <script src="js/modules/promotions/promotions.compiled.min.js"></script>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function() {
+        FastClick.attach(document.body);
+    }, false);
+    
+  </script>
+  <!-- Google Tag Manager-->
+  <noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KM6W8D" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <script type="text/javascript">
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KM6W8D');
+  </script>
+  <!-- End Google Tag Manager-->
+</html>

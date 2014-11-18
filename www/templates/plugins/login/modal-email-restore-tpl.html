@@ -1,0 +1,37 @@
+<div id="restoreDialog" class="modal hide fade login" tabindex="-1" role="dialog" aria-hidden="true"
+     style="display: none">
+    <form name="restoreForm" class="css-form restore-form" novalidate>
+        <button id="close-login-btn" type="button" class="btn close" data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+        <h3 class="modal-header">{{ 'RESTORE.TITLE' | i18n }}</h3>
+
+        <div class="modal-body form-horizontal">
+            <div class="alert alert-error alert-block restore-error" ng-show="restoreError && !restoreSent">
+                <strong>{{ 'RESTORE.FAIL'|i18n }}</strong> {{ 'RESTORE.FAIL.MSG'|i18n }}
+            </div>
+
+            <div class="alert alert-success alert-block" ng-show="restoreSent">
+                {{ 'RESTORE.SUCCESS.MSG'|i18n }}
+            </div>
+
+            <div class="restore-email" ng-show="!restoreSent">
+                <label>
+                    <span>{{'RESTORE.EMAIL' | i18n}}:</span>
+
+                    <div class="input-prepend input-block-level">
+                        <span class="add-on"><i class="icon-user"></i></span>
+                        <input type="email" id="email" ng-model="email"
+                               placeholder="{{ 'RESTORE.EMAIL' | i18n }}" required>
+                    </div>
+                </label>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="restore-btn" ng-show="!restoreSent" class="btn btn-submit restore-btn" ng-click="restore()"
+                    ng-disabled="restoreForm.$invalid">
+                {{ 'RESTORE.SUBMIT' | i18n }}
+            </button>
+        </div>
+    </form>
+</div>

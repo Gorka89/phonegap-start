@@ -1,0 +1,128 @@
+<cart-current-page-tpl></cart-current-page-tpl>
+
+<div id="cart-address" class="cart page-content" ng-controller="upp.cart.AddressCtrl">
+
+    <div class="alert alert-warning cart_empty-warning" ng-show="loaded && !correct">
+        <p><strong>{{'CART.EMPTY-CART' | i18n}}</strong></p>
+    </div>
+
+    <form name="form" class="cart-address-form css-form" ng-show="loaded && correct" novalidate>
+
+        <cart-breadcrumb-tpl
+                data-cart-step="address"
+                data-next-disabled="!orderCorrect || form.$invalid">
+        </cart-breadcrumb-tpl>
+
+        <div class="item cart-address-form-data">
+
+            <h2 class="item-header cart-address-stock-{{orderCorrect}}-msg">{{stockStatusMsg | i18n}}</h2>
+
+            <div class="cart-address-stock-true-info row-fluid" ng-show="orderCorrect" >
+
+                <div class="cart-address-final-price control-group form-horizontal">
+                    <span class="cart-address-label control-label">{{'CART.FINAL-PRICE' | i18n}}:</span>
+                    <span>{{price|number:2}}&nbsp;<currency-tpl data-currency-symbol="currency.display"></currency-tpl></span>
+                </div>
+
+                <div class="cart-addresses grid form-horizontal">
+                    <span class="cart-address-label control-label">{{'CART.ADDRESS.PAYMENT_MODEL'|i18n}}:</span>
+                    <ul>
+                        <li><label class="checkbox cart-address-label-checkbox" ng-show="payPalEnabled">
+                                <input id="payWithPaypal" type="radio"
+                                    ng-model="paymentModel" ng-value="1" value="1">
+                                {{'CART.ADDRESS.PAY_WITH_PAYPAL' | i18n}}
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checkbox cart-address-label-checkbox" ng-show="refundEnabled">
+                                <input id="payWithRefund" type="radio"
+                                       ng-model="paymentModel" ng-value="2" value="2">
+                                {{'CART.ADDRESS.PAY_WITH_REFUND' | i18n}}
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="cart-addresses grid">
+                    <div class="shipping two-cols-desktop form-horizontal" ng-show="showShippingAddress" >
+                        <span class="cart-address-label control-label">{{'CART.ADDRESS.SHIPPING' | i18n}}:</span>
+                        <shipping-billing-address-tpl
+                                data-address="shippingAddress"
+                                data-required="showShippingAddress"
+                                data-address-type="S">
+                        </shipping-billing-address-tpl>
+                    </div>
+
+                    <div class="billing two-cols-desktop form-horizontal">
+
+                        <div class="control-group">
+                            <span class="cart-address-label control-label">{{'CART.ADDRESS.BILLING'|i18n}}:</span>
+                            <label class="checkbox cart-address-label-checkbox" ng-show="showShippingAddress">
+                                <input id="sameAsShipping" type="checkbox"
+                                       ng-model="billingAddress.sameAsShipping">
+                                {{'CART.ADDRESS.SAME-AS-SHIPPING' | i18n}}
+                            </label>
+                        </div>
+
+                        <shipping-billing-address-tpl
+                                data-address="billingAddress"
+                                data-required="!billingAddress.sameAsShipping || !showShippingAddress"
+                                data-hide="showShippingAddress && billingAddress.sameAsShipping"
+                                data-address-type="B">
+                        </shipping-billing-address-tpl>
+
+                    </div>
+                </div>
+
+                <div class="cart-address-observations control-group form-horizontal">
+                    <label class="cart-address-label control-label observations" for="observations">{{'CART.ADDRESS.OBSERVATIONS'
+                        | i18n}}:</label>
+                    <div class="observations-value-wrapper">
+                        <textarea id="observations" class="textarea-vert-resize observations-value"
+                                  ng-model="observations"
+                                  placeholder="{{'CART.ADDRESS.OBSERVATIONS' | i18n}}"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="cart-address-stock-false-info" ng-hide="orderCorrect">
+
+                <li class="product in-cart cart-order-product incorrect item-box" ng-repeat="product in unavailable">
+
+                    <h2 class="product-name item-header">{{product.name}}</h2>
+
+                    <div class="row-fluid item-section">
+                        <div class="product-preview cart-order-product-preview span3"
+                             ng-style="{'background':'white url(' + product.preview + ') no-repeat center', '-webkit-background-size':'cover', '-moz-background-size':'cover', '-o-background-size':'cover', 'background-size':'cover'}"></div>
+
+                        <div class="cart-order-product-info span9">
+                            <div class="item-section-row product-size" ng-show="product.selectedAttribute.size">
+                                <label class="item-section-row-label">{{'PRODUCTS.PRODUCT.SIZE' |
+                                    i18n}}:</label>
+                                <span class="item-section-row-value">{{product.selectedAttribute.size}}</span>
+                            </div>
+                            <div class="item-section-row product-color" ng-show="product.selectedAttribute.color">
+                                <label class="item-section-row-label">{{'PRODUCTS.PRODUCT.COLOR' |
+                                    i18n}}:</label>
+                                <span class="item-section-row-value">{{product.selectedAttribute.color.name}}</span>
+                                <button type="button" class="color-icon hidden-phone"
+                                        ng-style="{backgroundColor : product.selectedAttribute.color.colorHex}">
+                                    &nbsp;</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <cart-breadcrumb-tpl
+                data-cart-step="address"
+                data-next-disabled="!orderCorrect || form.$invalid || !validPaymentModel()">
+        </cart-breadcrumb-tpl>
+
+    </form>
+
+
+</div>
+
+

@@ -1,0 +1,27 @@
+<div class="catalog" ng-controller="upp.plugins.products.CatalogCtrl">
+    <ol class="catalog-list">
+        <li ng-repeat="product in products|filter:filters" class="product in-catalog item">
+
+            <a class="touchable" href="#!/eshop/{{product.name|sanitize}}-{{product.id}}" title="{{product.name}}">
+
+                <h2 class="product-name ellipsis-text item-header">{{product.name}}</h2>
+
+                <div class="item-section product-preview"
+                     ng-style="{'background':'white url(' + product.preview + ') no-repeat center', '-webkit-background-size':'cover', '-moz-background-size':'cover', '-o-background-size':'cover', 'background-size':'cover'}">
+
+                    <products-prices-tpl
+                            data-price="product.price"
+                            data-currency="currency.display"
+                            data-promotions="product.promotions">
+                    </products-prices-tpl>
+
+                    <div class="product-preview-helper"></div>
+
+                </div>
+            </a>
+
+            <products-catalog-attributes-selector-tpl></products-catalog-attributes-selector-tpl>
+
+        </li>
+    </ol>
+</div>

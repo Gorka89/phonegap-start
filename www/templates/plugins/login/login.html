@@ -1,0 +1,61 @@
+<div id="loginDialog" class="modal hide fade login" tabindex="-1" role="dialog" aria-hidden="true"
+     style="display: none">
+    <form name="form" class="css-form login-form" novalidate>
+        <button id="close-login-btn" type="button" class="btn close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-header">Login</h3>
+
+        <div class="modal-body form-horizontal">
+
+            <div class="alert alert-error alert-block login-error" ng-show="loginError">
+                <button type="button" class="close" ng-click="hideError()">&times;</button>
+                <strong>{{'LOGIN.FAIL'|i18n}}</strong> {{'LOGIN.FAIL.MSG'|i18n}}
+            </div>
+
+            <div class="login-username">
+                <label>
+                    <span>{{'LOGIN.EMAIL' | i18n}}:</span>
+
+                    <div class="input-prepend input-block-level">
+                        <span class="add-on"><i class="icon-user"></i></span>
+                        <input type="text" id="username" ng-model="username"
+                               placeholder="{{'LOGIN.EMAIL' | i18n}}" required>
+                    </div>
+                </label>
+            </div>
+
+            <div class="login-password">
+                <label>
+                    <span>{{'LOGIN.PASSWORD' | i18n}}:</span>
+
+                    <div class="input-prepend input-block-level">
+                        <span class="add-on"><i class="icon-lock"></i></span>
+                        <input type="password" id="pass" ng-model="pass" autocomplete="off"
+                               placeholder="{{'LOGIN.PASSWORD' | i18n}}" required>
+                    </div>
+                </label>
+            </div>
+
+            <p class="text-right">
+                {{'LOGIN.HAVE_ACCOUNT' | i18n}} <a ng-href="#!/register"
+                                                   data-dismiss="modal"
+                                                   ng-click="redirectToRegister()"
+                                                   title="{{'LOGIN.REGISTER' | i18n}}">{{'HERE' | i18n}}</a>
+            </p>
+
+            <p class="text-right">
+                {{'LOGIN.RESTORE_PASSWORD' | i18n}} <a href="#" class="a-bg-green" title="Restore password"
+                                                       data-dismiss="modal"
+                                                       ng-click="openRestoreModal(); $event.preventDefault()">{{'HERE'
+                | i18n}}</a>
+            </p>
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" id="check-login-btn" class="btn btn-submit login-check-btn" ng-click="checkLogin()"
+                    ng-disabled="form.$invalid">
+                {{'LOGIN.SIGNIN' | i18n}}
+            </button>
+        </div>
+    </form>
+</div>

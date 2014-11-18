@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript">
+
+        (function (document, window, uppHelpers) {
+            'use strict';
+
+            var self = this,
+                    params = uppHelpers.getWindowParams(window);
+
+            self.mopub_ad_unit = params.unit;
+            self.mopub_keywords = params.keywords;
+
+
+            document.write('<script type="text/javascript" src="' + decodeURIComponent(params.url) + '"><\/script>');
+
+        }).call(this, document, window, parent.$UPP.HELPERS);
+
+    </script>
+</head>
+<body class="ad-iframe-content">
+</body>
+</html>

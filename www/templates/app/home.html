@@ -1,0 +1,25 @@
+<div id="home-mcommerce" class="home" ng-controller="upp.HomeCtrl"
+        >
+
+    <div class="logo-wrapper" ng-show="logo">
+        <img class="img logo" ng-src="{{logo}}" alt="{{childuppName}}">
+    </div>
+
+    <!-- inject directive 'home_icons-directive.js' -->
+    <rrss-icons-tpl
+            data-hide-eshop=true>
+    </rrss-icons-tpl>
+
+    <div class="home-business-who item clearfix" ng-controller="upp.HomeContentCtrl" ng-show="!showProducts" ng-bind-html="content">
+
+    </div>
+
+    <!-- inject 'product-catalog.html' -->
+    <products-catalog-tpl  ng-show="showProducts"
+            data-infinite-scroll-func="retrieveMoreProducts()"
+            data-infinite-scroll-without-init-when="loaded"
+            data-infinite-scroll-without-stop-when="!more"
+            data-infinite-scroll-busy="busy"
+            data-infinite-scroll-more-button="more">
+    </products-catalog-tpl>
+</div>

@@ -1,0 +1,30 @@
+<cart-current-page-tpl></cart-current-page-tpl>
+
+<div id="cart-payment" class="cart page-content" ng-controller="upp.cart.PaymentCtrl">
+
+    <cart-breadcrumb-tpl cart-step="payment" next-disabled="false"></cart-breadcrumb-tpl>
+
+    <div class="item cart-payment-error" ng-show="paymentError">
+        <p><strong>{{paymentError.title}}</strong> {{paymentError.msg}}</p>
+    </div>
+
+    <div class="item cart-payment-info-paypal" ng-show="!paymentError">
+
+        <p ng-hide="submitted">{{'CART.PAYMENT.' + paymentModel + '.ADVICE'|i18n}}</p>
+
+        <p ng-show="submitted">{{'CART.PAYMENT.' + paymentModel + '.REDIRECTING'|i18n}}</p>
+
+        <div class="cart-payment-paypal-wrapper">
+            <button type="button" class="btn btn-large cart-payment-paypal"
+                    ng-show="!submitted"
+                    ng-click="doPayment()">{{'CART.PAYMENT.' + paymentModel + '.BTN'|i18n}}
+            </button>
+        </div>
+
+    </div>
+
+    <cart-breadcrumb-tpl cart-step="payment" next-disabled="false"></cart-breadcrumb-tpl>
+
+</div>
+
+

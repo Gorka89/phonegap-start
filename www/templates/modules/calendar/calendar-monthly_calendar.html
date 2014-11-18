@@ -1,0 +1,25 @@
+<div class="month-calendar">
+    <div class="month-navigator">
+        <button ng-click="prevMonth()" class="prev-month-btn month-navigator-btn icon-arrow-left"></button>
+        <h2>{{ months[date.month] | i18n }} {{ date.year }}</h2>
+        <button ng-click="nextMonth()" class="next-month-btn month-navigator-btn icon-arrow-right"></button>
+    </div>
+    <ul>
+        <li class="calendar-header">
+            <ul class="clearfix">
+                <li ng-repeat="n in [] | range:7">
+                    {{ shortWeekDays[n] | i18n }}
+                </li>
+            </ul>
+        </li>
+        <li ng-if="data.days.length > 0">
+            <ul ng-repeat="row in data.days" class="clearfix">
+                <li ng-repeat="day in row"
+                    ng-class="{'disabled': data.monthDisabled || day.disabled || data.disabledDays[$index] || !day.hasEvents, 'selected': day.month == date.month && day.year == date.year && day.day == date.day, 'is-empty': day.isEmpty}"
+                    ng-click="(data.monthDisabled || day.disabled || data.disabledDays[$index] || !day.hasEvents) || daySelected(day.day, day.month, day.year)">
+                    <span ng-class="{'selected': day.month == date.month && day.year == date.year && day.day == date.day}">{{ day.day }}</span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

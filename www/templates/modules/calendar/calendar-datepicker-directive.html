@@ -1,0 +1,31 @@
+<div class="date-picker">
+    <input type="text" value="{{ model | date:'dd/MM/yyyy' }}" ng-click="toggleSelector(); $event.stopPropagation();" onkeydown="return false" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"/>
+
+    <div class="date-picker-selector" ng-show="selectorOpened">
+        <div class="month-navigator">
+            <button ng-click="moveMonth(-1); $event.stopPropagation();" class="prev-month-btn month-navigator-btn icon-arrow-left"></button>
+            <h2>{{ months[currentDate.getMonth()] | i18n }} {{ currentDate.getFullYear() }}</h2>
+            <button ng-click="moveMonth(1); $event.stopPropagation();" class="next-month-btn month-navigator-btn icon-arrow-right"></button>
+        </div>
+        <div class="date-picker-calendar">
+            <ul>
+                <li class="calendar-header">
+                    <ul>
+                        <li ng-repeat="n in [] | range:7">
+                            {{ shortWeekDays[n] | i18n }}
+                        </li>
+                    </ul>
+                </li>
+                <li ng-if="calendar.days.length > 0">
+                    <ul ng-repeat="row in calendar.days">
+                        <li ng-repeat="day in row"
+                            ng-class="{'selected': model.getDate() == day.day && day.month == model.getMonth() && day.year == model.getFullYear(), 'is-empty': day.isEmpty}"
+                            ng-click="selectDay(day.day)">
+                            <span>{{ day.day }}</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

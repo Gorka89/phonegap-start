@@ -1,0 +1,181 @@
+<div class="row-fluid user-data grid">
+
+    <div class="two-cols-desktop">
+
+        <!-- Email -->
+        <div class="control-group email">
+            <label class="control-label hidden-mini-phone" for="email">{{'LOGIN.EMAIL'|i18n}}:</label>
+
+            <div class="controls">
+                <div class="input-prepend input-block-level">
+                    <span class="add-on"><i class="icon-envelope"></i></span>
+                    <input type="email" class="span12 placeholder-tooltip"
+                           placeholder="{{'LOGIN.EMAIL' | i18n}} ({{'REQUIRED' | i18n}})"
+                           id="email"
+                           name="email"
+                           ng-model="email" autofocus required>
+                                <span class="add-on incorrect" ng-show='submitted && form.email.$invalid'><i
+                                        class="icon-close"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- First name -->
+        <div class="control-group name">
+            <label class="control-label hidden-mini-phone" for="name">{{'LOGIN.NAME'|i18n}}:</label>
+
+            <div class="controls">
+                <div class="input-prepend input-block-level">
+                    <span class="add-on"><i class="icon-user"></i></span>
+                    <input type="text" class="span12 placeholder-tooltip"
+                           placeholder="{{'LOGIN.NAME' | i18n}} ({{'REQUIRED' | i18n}})"
+                           id="name"
+                           name="name"
+                           ng-model="name" required>
+                                <span class="add-on incorrect" ng-show='submitted && form.name.$invalid'><i
+                                        class="icon-close"></i></span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Last name -->
+        <div class="control-group surname">
+            <label class="control-label hidden-mini-phone" for="surname">{{'LOGIN.SURNAME'|i18n}}:</label>
+
+            <div class="controls">
+                <div class="input-prepend input-block-level">
+                    <span class="add-on"><i class="icon-user"></i></span>
+                    <input type="text" class="span12 placeholder-tooltip"
+                           placeholder="{{'LOGIN.SURNAME' | i18n}} ({{'REQUIRED' | i18n}})"
+                           id="surname"
+                           name="surname"
+                           ng-model="surname" required>
+                                <span class="add-on incorrect" ng-show='submitted && form.surname.$invalid'><i
+                                        class="icon-close"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phone number-->
+        <div class="control-group phone">
+            <label class="control-label hidden-mini-phone" for="phone">{{'LOGIN.PHONE'|i18n}}:</label>
+
+            <div class="controls">
+                <div class="input-prepend input-block-level">
+                    <span class="add-on"><i class="icon-phone"></i></span>
+                    <input type="text" class="span12 placeholder-tooltip" placeholder="{{'LOGIN.PHONE' | i18n}}"
+                           id="phone"
+                           ng-model="phone">
+                </div>
+            </div>
+        </div>
+
+        <!-- Password-->
+        <div class="control-group password">
+            <label class="control-label hidden-mini-phone" for="password">{{'LOGIN.PASSWORD'|i18n}}:</label>
+
+            <div class="controls">
+                <div class="input-prepend input-block-level">
+                    <span class="add-on"><i class="icon-lock"></i></span>
+                    <input type="Password" class="span12 placeholder-tooltip" autocomplete="off"
+                           placeholder="{{'LOGIN.PASSWORD' | i18n}} ({{'REQUIRED' | i18n}})"
+                           id="password" name="password" ng-model="password" required>
+                                <span class="add-on incorrect" ng-show='submitted && form.password.$invalid'><i
+                                        class="icon-close"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Password confirm-->
+        <div class="control-group passwordConfirm">
+            <label class="control-label hidden-mini-phone"
+                   for="passwordConfirm">{{'LOGIN.PASSWORD.CONFIRM'|i18n}}:</label>
+
+            <div class="controls">
+                <div class="input-prepend input-block-level">
+                    <span class="add-on"><i class="icon-lock"></i></span>
+                    <input type="Password" class="span12 placeholder-tooltip" same-as='password' autocomplete="off"
+                           placeholder="{{'LOGIN.PASSWORD.CONFIRM' | i18n}} ({{'REQUIRED' | i18n}})"
+                           id="passwordConfirm" name="passwordConfirm"
+                           ng-model="passwordConfirm" required>
+                                <span class="add-on incorrect" ng-show='submitted && form.passwordConfirm.$invalid'><i
+                                        class="icon-close"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="two-cols-desktop">
+
+        <!-- Address -->
+        <div class="control-group address">
+            <label class="control-label hidden-mini-phone" for="address">{{'ADDRESS.NAME'|i18n}}:</label>
+
+            <div class="controls">
+                <div class="input-prepend input-block-level">
+                    <span class="add-on"><i class="icon-home"></i></span>
+                    <textarea class="span12 input-2h placeholder-tooltip textarea-vert-resize" rows="3" id="address"
+                              ng-model="address.address"
+                              placeholder="{{'ADDRESS.NAME' | i18n}}">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Postal code -->
+        <div class="control-group postalCode">
+            <label class="control-label hidden-mini-phone"
+                   for="postalCode">{{'ADDRESS.POSTAL-CODE'|i18n}}:</label>
+
+            <div class="controls">
+                <div class="input-prepend input-block-level">
+                    <span class="add-on"><i class="icon-home"></i></span>
+                    <input type="text" class="span12 placeholder-tooltip" id="postalCode" ng-model="address.postalCode"
+                           placeholder="{{'ADDRESS.POSTAL-CODE' | i18n}}">
+                </div>
+            </div>
+        </div>
+
+        <!-- City -->
+        <div class="control-group city">
+            <label class="control-label hidden-mini-phone" for="city">{{'ADDRESS.CITY'|i18n}}:</label>
+
+            <div class="controls">
+                <div class="input-prepend input-block-level">
+                    <span class="add-on"><i class="icon-home"></i></span>
+                    <input type="text" class="span12 placeholder-tooltip" id="city" ng-model="address.city"
+                           placeholder="{{'ADDRESS.CITY' | i18n}}">
+                </div>
+            </div>
+        </div>
+
+        <!-- State -->
+        <div class="control-group state">
+            <label class="control-label hidden-mini-phone" for="state">{{'ADDRESS.STATE'|i18n}}:</label>
+
+            <div class="controls">
+                <div class="input-prepend input-block-level">
+                    <span class="add-on"><i class="icon-home"></i></span>
+                    <input type="text" class="span12 placeholder-tooltip" id="state" ng-model="address.state"
+                           placeholder="{{'ADDRESS.STATE' | i18n}}">
+                </div>
+            </div>
+        </div>
+
+        <!-- Country -->
+        <div class="control-group country">
+            <label class="control-label hidden-mini-phone" for="country">{{'ADDRESS.COUNTRY'|i18n}}:</label>
+
+            <div class="controls">
+                <div class="input-prepend input-block-level">
+                    <span class="add-on"><i class="icon-home"></i></span>
+                    <input type="text" class="span12 placeholder-tooltip" id="country" ng-model="address.country"
+                           placeholder="{{'ADDRESS.COUNTRY' | i18n}}">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
